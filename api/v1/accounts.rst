@@ -129,3 +129,86 @@ Information
 		    }
 		  }
 		}
+
+Utility
+****************************************
+
+.. http:put:: /accounts/invite
+
+	Send email to invite new user for the controller
+
+	Example response:
+
+	.. code-block:: json
+
+		{
+		  "success": true,
+		  "data": []
+		}
+
+.. http:put:: /accounts/password/reset
+
+	Sends email to the corresponding user with the password reset link
+
+	Example response:
+
+	.. code-block:: json
+
+		{
+		  "success": true,
+		  "data": []
+		}
+
+.. http:get:: /accounts/messages/(int:message_id)
+
+	Gets one message from database according to message_id.
+
+	Example response:
+
+	.. code-block:: json
+
+		{
+	  		"success": true,
+	  		"data": {
+	   	 		"id": 156,
+	    		"subject": "Kotivo yhteysvika: 666",
+	    		"content": "Keskusyksikkösi \"666\" ei ole ollut yhteydessä vuorokauteen. Tarkista keskusyksikkösi internet yhteys.",
+	    		"created": "2019-09-25T11:56:01+03:00",
+	    		"seen": true,
+	    		"metadata": {
+	      			"dismissed": true
+	    		}
+	  		}
+		}
+
+Controllers
+****************************************
+
+.. http:get:: /controllers/(int:controller_id)
+
+	Retrieves controller attached to single profile
+
+	:>json int id: Controller ID
+	:>json string label: Name of the Controller
+	:>json string version: Version of the binary installed in controller
+	:>json boolean connected: Flag to see if controller has a server connection
+	:>json striweather_localityng access: Level of access
+	:>json object weather_locality: Weather station information
+	:>json int weather_locality.id: Station id
+	:>json string weather_locality.source: Source of weather info ie. ilmatieteenlaitos (fmi)
+	:>json string weather_locality.label: Station name
+	:>json string weather_locality.temperature: Outside temperature according to the weather station
+	:>json boolean away: Away status
+	:>json array profiles: List of profile id:s for this controller - excluding away temporarily
+	:>json array modules: List of modules/devices attached to this controller
+	:>json object electricity: All the necessary information needed for price calculations and energy consumption log creation
+	:>json array modules: List of all the modules consuming electricity - types 2 and 4
+	:>json string tariff: Billing type for electricity
+	:>json object price: Pricing information for the current electricity billing type
+	:>json float primary: One of the fields for ie. period pricings of electricity
+	:>json float secondary: Second of the fields for ie. period pricings of electricity
+	:>json object period: Date/Time object for the hours in all types of period pricings
+	:>json object time: Duration of the price setting
+	:>json ISO 8601 begin: When the pricing period starts
+	:>json ISO 8601 begin: When the pricing period ends
+	
