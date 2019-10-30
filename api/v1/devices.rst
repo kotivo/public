@@ -9,8 +9,6 @@ General
 
 	Retrieves all the modules (devices) registered to this controller - can target a specific module_id device, gets all if module_id is not set
 
-	:>json boolean success: Flag to check if method call was a success
-	:>json array data: All the device objects in an array
 	:>json int id: Device id number
 	:>json string label: Name of the device - shown in ui
 	:>json int serial_number: Serial number - used in authentication
@@ -105,26 +103,22 @@ General
 
 .. http:put:: /controllers/(int:controller_id)/modules/(int:module_id)
 
-	Creates a new device according to parameters - controller_id, label, serial_number and ferification_code are required, type can not be sot through this method. type is set outside of api. Proper functionality requires type != 0. If physical device is found, controller gets and sets type accordingly
+	Creates a new device according to parameters - controller_id, and module_id are required, type can not be set through this method. type is set outside of api. Proper functionality requires type != 0. If physical device is found, controller gets and sets type accordingly
 
-	Example response:
+	:<json string label: Label of the device
+	:<json int serial number: Serial number for the device
+	:<json string verification code: Required verification code for authentication purposes
+	:<json boolean weather_station: Whether or not this device is used as a weather station
+	:<json object metadata: All the misc. data
+
+	Example request body:
 
 	.. code-block:: json
 
 		{
-			"success": true,
-			"data": {
-				"id": 28,
-				"label": "puttis",
-				"serial_number": 100000,
-				"verification_code": "12345678",
-				"type": 0,
-				"connected": false,
-				"weather_station": false,
-				"error": {
-					"code": 0,
-					"msg": "Messages not in use so far."
-				},
-				"metadata": []
-			}
+			"label": "puttis",
+			"serial_number": 100000,
+			"verification_code": "12345678",
+			"weather_station": false,
+			"metadata": []
 		}

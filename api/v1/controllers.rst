@@ -9,8 +9,6 @@ General
 
 	Retrieves controllers - if controller_id parameter is given gets a specific controller_id, gets all if controller_id is not set
 
-	:>json boolean success: True if data gathered without errors
-	:>json array data: Array of all the controller data
 	:>json int id: Controller ID
 	:>json string label: Name of the Controller
 	:>json string version: Version of the binary installed in controller
@@ -141,17 +139,108 @@ General
 			]
 		}
 
+.. http:put:: /controllers/(int:controller_id)
+
+	Method to change label, prices, weather locality etc. - Always requires controller_id
+
+	:<json string label: Name of the Controller
+	:<json object weather_locality: Weather station information
+	:<json int weather_locality.id: Station id
+	:<json string weather_locality.source: Source of weather info ie. ilmatieteenlaitos (fmi)
+	:<json object electricity: All the necessary information needed for price calculations and energy consumption log creation
+	:<json string electricity.tariff: Billing type for electricity
+	:<json object electricity.price: Pricing information for the current electricity billing type
+	:<json float electricity.price.primary: One of the fields for ie. period pricings of electricity
+	:<json float electricity.price.secondary: Second of the fields for ie. period pricings of electricity
+	:<json object electricity.price.period: Date/Time object for the hours in all types of period pricings
+	:<json object electricity.price.period.time: Duration of the price setting (hours:mins)
+	:<json ISO-8601 electricity.price.period.time.begin: When the pricing period starts
+	:<json ISO-8601 electricity.price.period.time.end: When the pricing period ends
+	:<json object electricity.price.period.date: Beginning and end dates of the period
+	:<json ISO-8601 electricity.price.period.date.begin: Beginnging date of the period pricing
+	:<json ISO-8601 electricity.price.period.date.end: End date of the period pricing
+	:<json float electricity.price.margin: Electricity pricing margin
+	:<json float electricity.price.max_effect: Level of effect for the stock price calculations
+	:<json object electricity.transmission: Electricity transmission info
+	:<json string electricity.transmission.type: Type of transmission pricing
+	:<json object electricity.transmission.price: Transmission pricing info
+	:<json float electricity.transmission.price.primary: One of the fields for ie. period pricings of electricity transmission
+	:<json float electricity.transmission.price.secondary: Second of the fields for ie. period pricings of electricity transmission
+	:<json object electricity.transmission.price.period: Time and date for the beginning and end of transmission period prices
+	:<json object electricity.transmission.price.period.time: Time in hours and minutes
+	:<json ISO-8601 electricity.transmission.price.period.time.begin: Beginnging of the period transmission pricing
+	:<json ISO-8601 electricity.transmission.price.period.time.end: End of the period transmission pricing
+	:<json object electricity.transmission.price.period.date: Beginning and end dates of transmission pricing
+	:<json ISO-8601 electricity.transmission.price.period.date.begin: Beginnging date of the period transmission pricing
+	:<json ISO-8601 electricity.transmission.price.period.date.end: End date of the period transmission pricing
+	:<json object metadata: All the misc. data
+
+	Example request body:
+
+	.. code-block:: json
+
+		{
+			"id": 666,
+			"label": "toinen",
+			"weather_locality": {
+				"id": 101632,
+				"source": "ilmatieteenlaitos",
+			},
+    		"electricity": {
+      			"tariff": "stock price",
+      			"price": {
+       				"current": 11.08,
+       				"usage": 0,
+       				"primary": 0.6,
+       				"secondary": 0,
+       				"period": {
+    					"time": {
+           					"begin": "00:00",
+           					"end": "00:00"
+       					},
+       					"date": {
+           					"begin": "--01-01",
+           					"end": "--01-01"
+       					}
+       				},
+       				"margin": 5,
+       				"max_effect": 1
+      			},
+      			"transmission": {
+        			"type": "generic",
+        			"price": {
+       					"primary": 100,
+       					"secondary": 0,
+       					"period": {
+           					"time": {
+           						"begin": "00:00",
+          						"end": "00:00"
+           					},
+           					"date": {
+           						"begin": "--01-01",
+           						"end": "--01-01"
+           					}
+       					}
+       				}
+      			},
+    			"metadata": []
+  			}
+		}
+
+Accounts
+****************************************
+
 .. http:get:: /controllers/(int:controller_id)/accounts/(int:account_id)
 
 	Retrieves all the accounts attached to this controller - if account_id parameter is given gets a specific account_id, gets all if account_id is not set
 
-	:>json boolean success: Flag to check if method call returned without errors
-	:>json array data: All the object data
-	:>json int id: Account id number
-	:>json email email: Valid email adress for the account - Same as username
-	:>json string firstname: First name of the user (spelled wrong)
-	:>json string lastname: Las name of the user (spelled wrong)
-	:>json string access: Access level of the user
+	:<json boolean success: Flag to check if method call returned without errors
+	:<json array data: All the object data
+	:<json int id: Account id number
+	:<json email email: Valid email adress for the account - Same as username
+	:<json string firstname: First name of the user (spelled wrong)
+	:<json string lastname: Las name of the user (spelled wrong)
+	:<json string access: Access level of the user
 
 	Example response:
 
@@ -169,3 +258,5 @@ General
     			}
   			]
 		}
+
+	No option for PUT

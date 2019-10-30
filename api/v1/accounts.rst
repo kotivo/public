@@ -137,31 +137,39 @@ Utility
 
 	Send email to invite new user for the controller
 
-	Example response:
+	Example request body:
 
 	.. code-block:: json
 
 		{
-		  "success": true,
-		  "data": []
+		  "email": "assi.asiakas@kotivo.fi",
+		  "controller_id": 666
 		}
 
 .. http:put:: /accounts/password/reset
 
 	Sends email to the corresponding user with the password reset link
 
-	Example response:
+	:<json email email: Target email address
+
+	Example request:
 
 	.. code-block:: json
 
 		{
-		  "success": true,
-		  "data": []
+			"email": "assi.asiakas@kotivo.fi"
 		}
 
 .. http:get:: /accounts/messages/(int:message_id)
 
 	Gets one message from database according to message_id.
+
+	:>json int id: Message id
+	:>json string subject: The subject title of the message
+	:>json string content: Actual content of the message
+	:>json ISO-8601 created: Time when the message was created
+	:>json boolean seen: Whether or not the message is acknoweledged
+	:>json object metadata: All the misc. data
 
 	Example response:
 
