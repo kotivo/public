@@ -182,11 +182,14 @@ Utility
 		}
 
 Controllers
+########################################
+
+General
 ****************************************
 
 .. http:get:: /controllers/(int:controller_id)
 
-	Retrieves controllers attached to single profile
+	Retrieves controllers - if controller_id parameter is given gets a specific controller_id, gets all if controller_id is not set
 
 	:>json boolean success: True if data gathered without errors
 	:>json array data: Array of all the controller data
@@ -320,9 +323,9 @@ Controllers
 			]
 		}
 
-	.. http:get:: /controllers/(int:controller_id)/accounts/(int:account_id)
+.. http:get:: /controllers/(int:controller_id)/accounts/(int:account_id)
 
-	Retrieves all the accounts attached to this controller - can be targeted to a specific account with account_id, gets all if left empty
+	Retrieves all the accounts attached to this controller - if account_id parameter is given gets a specific account_id, gets all if account_id is not set
 
 	:>json boolean success: Flag to check if method call returned without errors
 	:>json array data: All the object data
@@ -331,6 +334,8 @@ Controllers
 	:>json string firstname: First name of the user (spelled wrong)
 	:>json string lastname: Las name of the user (spelled wrong)
 	:>json string access: Access level of the user
+
+	Example response:
 
 	.. code-block:: json
 
@@ -348,11 +353,14 @@ Controllers
 		}
 
 Devices
+########################################
+
+General
 ****************************************
 
 .. http:get:: /controllers/(int:controller_id)/modules/(int:module_id)
 
-	Retrieves all the modules (devices) registered to this controller - can target a specific id device, gets all if left empty
+	Retrieves all the modules (devices) registered to this controller - can target a specific module_id device, gets all if module_id is not set
 
 	:>json boolean success: Flag to check if method call was a success
 	:>json array data: All the device objects in an array
@@ -373,8 +381,8 @@ Devices
 	:>json float temperature.current: Current measured average temperature with two decimal accuracy
 	:>json float temperature.target: Current target temperature to achieve
 	:>json object temperature.warning: All the temperature warning limits
-	:>json int temperature.warning.min: Limit minimum when warnings are sent
-	:>json int temperature.warning.max: Limit maximum when warnings are sent
+	:>json int temperature.warning.min: Limit minimum when temperature warnings are sent
+	:>json int temperature.warning.max: Limit maximum when temperature warnings are sent
 	:>json boolean temperature.advance: Flag the check whether or not advance heating is on
 	:>json int temperature.safety: Safety target temperature when connection is ofline 30min. or more
 	:>json object temperature.floor_sensor: Settings to show if floor sensor controls, is in use or is disabled - also saves the floor temperature in its own variable
@@ -386,14 +394,16 @@ Devices
 	:>json object humidity: All the humidity data
 	:>json float humidity.current: Current measured relative humidity with two decimal accuracy
 	:>json object humidity.warning: All the humidity warning limits
-	:>json int humidity.warning.min: Limit minimum when warnings are sent
-	:>json int humidity.warning.max: Limit maximum when warnings are sent
+	:>json int humidity.warning.min: Limit minimum when humidity warnings are sent
+	:>json int humidity.warning.max: Limit maximum when humidity warnings are sent
 	:>json object electricity: Electricity data
 	:>json object electricity.price: Price data
 	:>json string electricity.price.max_effect: Effect of stock electricity prices (should be int or float?)
 	:>json string manufacturer: Manufacturer of current ASHP unit
 	:>json ISO-8601 rapid_heat: Rapid heating on ASHP !DEPRECATED!
 	:>json int power: Maximum power consumption of heater in wats
+
+	Example response:
 
 	.. code-block:: json
 
@@ -443,5 +453,31 @@ Devices
 					}
 				},
 				"power": 0
+			}
+		}
+
+.. http:put:: /controllers/(int:controller_id)/modules/(int:module_id)
+
+	Creates/updates a new device according to parameters - controller_id, label, serial_number and ferification_code are required, type can be left empty but proper functionality requires type != 0. If physical device is found, controller gets and sets type accordingly
+
+	Example response:
+
+	.. code-block:: json
+
+		{
+			"success": true,
+			"data": {
+				"id": 28,
+				"label": "puttis",
+				"serial_number": 100000,
+				"verification_code": "12345678",
+				"type": 0,
+				"connected": false,
+				"weather_station": false,
+				"error": {
+					"code": 0,
+					"msg": "Messages not in use so far."
+				},
+				"metadata": []
 			}
 		}
