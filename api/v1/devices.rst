@@ -9,6 +9,8 @@ General
 
 	Retrieves all the modules (devices) registered to this controller - can target a specific module_id device, gets all if module_id is not set
 
+	Here is a list of parameters for the request body - Everything not under the ORIGINAL are device type specific and cannot be given to any other type of device
+
 	:>json int id: Device id number
 	:>json string label: Name of the device - shown in ui
 	:>json int serial_number: Serial number - used in authentication
@@ -18,6 +20,7 @@ General
 	:>json boolean weather_station: Flag to see whether or not device is used as weather station
 	:>json object error: Error message information
 	:>json int error.code: Error code id
+
 	:>json string error.msg: Error message from device
 	:>json object metadata: All the misc. data is stored here as "key" : data pairs
 	:>json int metadata.order: ASK
@@ -47,6 +50,69 @@ General
 	:>json string manufacturer: Manufacturer of current ASHP unit
 	:>json ISO-8601 rapid_heat: Rapid heating on ASHP !DEPRECATED!
 	:>json int power: Maximum power consumption of heater in wats
+	**TYPE4 (ASHP)**
+
+	:>json object temperature: Temperature data
+	:>json object temperature.freeze_limit: Freeze limit data
+	:>json boolean temperature.freeze_limit.on: Whether or not the freeze limit is in use
+	:>json float temperature.freeze_limit.when: What is the limit temperature when the freeze limit is turned 
+	:>json string manufacturer:
+		Supported ASHP unit manufacturers (31.11.2019):
+
+
+		* Panasonic
+		* Mitsubishi
+		* Toshiba
+		* Fujitsu
+		* LG
+		* IVT
+		* Hitachi
+		* Carrier
+		* Onnline
+		* Daikin
+		* Daitsu
+		* Gree
+		* Sharp
+		* Electrolux
+		* Samsung
+		* Wilfa
+		* Mitsubishi2
+		* Mitsubishi3
+		* Toshiba2
+		* Fujitsu2
+		* Midea
+
+	**TYPE5 (asdafasdfasfasf)**
+
+	:>json object temperature: Temperature data
+	:>json string temperature.floor_sensor.mode:
+		Current floor sensor mode - installed, control_by and null:
+
+		* off
+		* installed
+		* control_by
+
+	**TYPE6 (Water heater and smart switch - not in production)**
+
+	:>json object switch: Includes parameters for smart switch
+	:>json boolean switch.safety: Whether or not the safety is on
+	:>json object water_heater: Includes all the parameters for water heaters
+	:>json string water_heater.mode: Is the heater in manual or auto mode
+	:>json int water_heater.manual_hours: 
+	:>json int water_heater.volume: Volume of the heater
+	:>json int water_heater.power: How powerfull the heater is in wats
+	:>json int water_heater.people_count: 
+	:>json string water_heater.consumption:
+		How high is the water consumption:
+
+		* low
+		* medium
+		* high
+
+
+
+
+
 
 	Example response:
 
@@ -122,3 +188,10 @@ General
 			"weather_station": false,
 			"metadata": []
 		}
+
+Original
+****************************************
+
+.. http:get:: /controllers/(int:controller_id)/modules/(int:module_id)
+
+	Retrieves all the modules (devices) registered to this controller - can target a specific module_id device, gets all if module_id is not set
