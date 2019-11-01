@@ -20,7 +20,6 @@ General
 	:>json boolean weather_station: Flag to see whether or not device is used as weather station
 	:>json object error: Error message information
 	:>json int error.code: Error code id
-
 	:>json string error.msg: Error message from device
 	:>json object metadata: All the misc. data is stored here as "key" : data pairs
 	:>json int metadata.order: ASK
@@ -32,13 +31,6 @@ General
 	:>json int temperature.warning.min: Limit minimum when temperature warnings are sent
 	:>json int temperature.warning.max: Limit maximum when temperature warnings are sent
 	:>json boolean temperature.advance: Flag the check whether or not advance heating is on
-	:>json int temperature.safety: Safety target temperature when connection is ofline 30min. or more
-	:>json object temperature.floor_sensor: Settings to show if floor sensor controls, is in use or is disabled - also saves the floor temperature in its own variable
-	:>json float temperature.floor_sensor.current: Current floor temperature
-	:>json string temperature.floor_sensor.mode: Current floor sensor mode - installed, control_by and null
-	:>json object temperature.freeze_limit: Freeze limit data
-	:>json boolean temperature.freeze_limit.on: Flag to see whether or not the freeze limit is in use
-	:>json int temperature.freeze_limit.when: Temperature minimum for freeze limit - needs to be set according to heater specifications
 	:>json object humidity: All the humidity data
 	:>json float humidity.current: Current measured relative humidity with two decimal accuracy
 	:>json object humidity.warning: All the humidity warning limits
@@ -47,15 +39,27 @@ General
 	:>json object electricity: Electricity data
 	:>json object electricity.price: Price data
 	:>json string electricity.price.max_effect: Effect of stock electricity prices (should be int or float?)
-	:>json string manufacturer: Manufacturer of current ASHP unit
-	:>json ISO-8601 rapid_heat: Rapid heating on ASHP !DEPRECATED!
 	:>json int power: Maximum power consumption of heater in wats
+
+	**TYPE2** (General electric)
+
+	:>json object temperature: Temperature data
+	:>json float temperature.safety: Target temperature when safety mode is on
+	:>json object temperature.floor_sensor: Floor sensor data
+	:>json string temperature.floor_sensor.mode: 
+		Current floor sensor mode - installed, control_by and null:
+
+		* off
+		* installed
+		* control_by
+
 	**TYPE4 (ASHP)**
 
 	:>json object temperature: Temperature data
 	:>json object temperature.freeze_limit: Freeze limit data
 	:>json boolean temperature.freeze_limit.on: Whether or not the freeze limit is in use
 	:>json float temperature.freeze_limit.when: What is the limit temperature when the freeze limit is turned 
+	:>json ISO-8601 rapid_heat: Rapid heating on ASHP !DEPRECATED!
 	:>json string manufacturer:
 		Supported ASHP unit manufacturers (31.11.2019):
 
@@ -82,7 +86,7 @@ General
 		* Fujitsu2
 		* Midea
 
-	**TYPE5 (asdafasdfasfasf)**
+	**TYPE5 (Servo controlled radiator valve)**
 
 	:>json object temperature: Temperature data
 	:>json string temperature.floor_sensor.mode:
@@ -100,7 +104,7 @@ General
 	:>json string water_heater.mode: Is the heater in manual or auto mode
 	:>json int water_heater.manual_hours: 
 	:>json int water_heater.volume: Volume of the heater
-	:>json int water_heater.power: How powerfull the heater is in wats
+	:>json int water_heater.power: Maximum power intake of the heater in wats
 	:>json int water_heater.people_count: 
 	:>json string water_heater.consumption:
 		How high is the water consumption:
