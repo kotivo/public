@@ -113,11 +113,6 @@ General
 		* medium
 		* high
 
-
-
-
-
-
 	Example response:
 
 	.. code-block:: json
@@ -192,10 +187,3 @@ General
 			"weather_station": false,
 			"metadata": []
 		}
-
-Original
-****************************************
-
-.. http:get:: /controllers/(int:controller_id)/modules/(int:module_id)
-
-	Retrieves all the modules (devices) registered to this controller - can target a specific module_id device, gets all if module_id is not set

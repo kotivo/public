@@ -7,3 +7,5 @@
    accounts
    controllers
    devices
+   profiles
+   rules
