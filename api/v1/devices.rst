@@ -47,7 +47,7 @@ General
 	:>json float temperature.safety: Target temperature when safety mode is on
 	:>json object temperature.floor_sensor: Floor sensor data
 	:>json string temperature.floor_sensor.mode: 
-		Current floor sensor mode - installed, control_by and null:
+		Current floor sensor mode:
 
 		* off
 		* installed
@@ -89,6 +89,7 @@ General
 	**TYPE5 (Servo controlled radiator valve)**
 
 	:>json object temperature: Temperature data
+	:>json float temperature.safety: Target temperature when safety mode is on
 	:>json string temperature.floor_sensor.mode:
 		Current floor sensor mode - installed, control_by and null:
 
@@ -96,7 +97,7 @@ General
 		* installed
 		* control_by
 
-	**TYPE6 (Water heater and smart switch - not in production)**
+	**TYPE6 and 7 (Water heater and smart switch - not in production)**
 
 	:>json object switch: Includes parameters for smart switch
 	:>json boolean switch.safety: Whether or not the safety is on

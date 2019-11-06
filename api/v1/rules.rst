@@ -10,8 +10,47 @@ General
 	:>json string id: Name of the rule - int if self made rule
 	:>json float temperature: Target temperature for this rule
 	:>json array metadata: All the misc. data
-	:>json object type4: The name of the key changes according to device type. Object includes all the different settings for the rule
-	:>json boolean type4.on: Is the device on right now?
+
+	Example response:
+
+	.. code-block:: json
+
+		{
+			"id": "present",
+			"temperature": 23,
+			"metadata": []
+		}
+
+	**TYPE4**
+
+	:>json object type4: All the ASHP data
+	:>json boolean type4.on: Whether the ASHP is on in this rule or not
+	:>json string type4.mode: 
+		Which mode is selected for this rule:
+
+		* hot
+		* cold
+		* dry
+		* fan
+		* auto
+
+	:>json string type4.fan:
+		Fan speed in percentages - percentage steps differ by ASHP model:
+
+		* auto
+		* 0
+		* 33
+		* 66
+		* 100
+
+	:>json object swing: Flap swing direction data
+	:>json string swing.horizontal: Flap percentage horizontally
+	:>json string swing.vertical: Flap percentage vertically
+
+	**TYPE 6 and 7**
+
+	:>json object switch: Smart switch status
+	:>json object switch.on: Whether the switch is on or not
 
 	Example response:
 
@@ -75,3 +114,71 @@ General
 				}
 			}
 		]
+
+.. http:put:: /controllers/(int:controller_id)/modules/(int:device_id)/rules/(int:profile_id)
+
+	Changes data in the selected rule - (int:controller_id), (int:device_id) and (int:profile_id) are required ???? why the profile id is checked as optional in tool ????
+
+	:<json int id: Id of the rule - string if "present" or "away"
+	:<json float temperature: Target temperature for the chosen rule
+	:<json array metadata: Misc. data
+
+	Example request body:
+
+	.. code-block:: json
+
+		{
+			"id": "present",
+			"temperature": 23,
+			"metadata": []
+		}
+
+	**TYPE4**
+
+	:<json object type4: All the ASHP data
+	:<json boolean type4.on: Whether the ASHP is on in this rule or not
+	:<json string type4.mode: 
+		Which mode is selected for this rule:
+
+		* hot
+		* cold
+		* dry
+		* fan
+		* auto
+
+	:<json string type4.fan:
+		Fan speed in percentages - percentage steps differ by ASHP model:
+
+		* auto
+		* 0
+		* 33
+		* 66
+		* 100
+
+	:<json object swing: Flap swing direction data
+	:<json string swing.horizontal: Flap percentage horizontally
+	:<json string swing.vertical: Flap percentage vertically
+
+	Example request body:
+
+	.. code-block:: json
+
+		{
+			"id": "present",
+			"temperature": 18,
+			"metadata": [],
+			"type4": {
+				"on": true,
+				"mode": "hot",
+				"fan": "auto",
+				"swing": {
+					"horizontal": null,
+					"vertical": "75"
+				}
+			}
+		}
+
+	**TYPE 6 and 7 (Not in production!)**
+
+	:<json object switch: Smart switch status
+	:<json object switch.on: Whether the switch is on or not

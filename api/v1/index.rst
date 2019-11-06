@@ -9,3 +9,4 @@
    devices
    profiles
    rules
+   weather_localities
