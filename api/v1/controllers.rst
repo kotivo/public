@@ -59,84 +59,79 @@ General
 	.. code-block:: json
 
 		{
-			"success": true,
-			"data": [
-				{
-					"id": 666,
-					"label": "666",
-					"version": "v2",
-					"connected": true,
-					"access": "owner",
-					"weather_locality": {
-						"id": 101632,
-						"source": "ilmatieteenlaitos",
-						"label": "Joensuu Linnunlahti",
-						"temperature": 7.4
-					},
-					"away": false,
-					"profiles": [
-						1,
-						2
-					],
-					"modules": [
-						19,
-						20,
-						21,
-						22,
-						23,
-						24
-					],
-					"electricity": {
-						"modules": [
-							19,
-							22,
-							23,
-							24
-						],
-						"tariff": "stock price",
-						"price": {
-						"current": 11.2,
-							"usage": 0,
-							"primary": 0.6,
-							"secondary": 0,
-							"period": {
-								"time": {
-									"begin": "00:00",
-									"end": "00:00"
-								},
-								"date": {
-									"begin": "--01-01",
-									"end": "--01-01"
-								}
-							},
-							"margin": 5,
-							"max_effect": 1
+			"id": 666,
+			"label": "666",
+			"version": "v2",
+			"connected": true,
+			"access": "owner",
+			"weather_locality": {
+				"id": 101632,
+				"source": "ilmatieteenlaitos",
+				"label": "Joensuu Linnunlahti",
+				"temperature": 7.4
+			},
+			"away": false,
+			"profiles": [
+				1,
+				2
+			],
+			"modules": [
+				19,
+				20,
+				21,
+				22,
+				23,
+				24
+			],
+			"electricity": {
+				"modules": [
+					19,
+					22,
+					23,
+					24
+				],
+				"tariff": "stock price",
+				"price": {
+				"current": 11.2,
+					"usage": 0,
+					"primary": 0.6,
+					"secondary": 0,
+					"period": {
+						"time": {
+							"begin": "00:00",
+							"end": "00:00"
 						},
-						"transmission": {
-							"type": "generic",
-							"price": {
-								"primary": 100,
-								"secondary": 0,
-								"period": {
-									"time": {
-										"begin": "00:00",
-										"end": "00:00"
-									},
-									"date": {
-										"begin": "--01-01",
-										"end": "--01-01"
-									}
-								}
-							}
-						},
-						"power": {
-							"current": 0,
-							"max": 0
+						"date": {
+							"begin": "--01-01",
+							"end": "--01-01"
 						}
 					},
-					"metadata": []
+					"margin": 5,
+					"max_effect": 1
+				},
+				"transmission": {
+					"type": "generic",
+					"price": {
+						"primary": 100,
+						"secondary": 0,
+						"period": {
+							"time": {
+								"begin": "00:00",
+								"end": "00:00"
+							},
+							"date": {
+								"begin": "--01-01",
+								"end": "--01-01"
+							}
+						}
+					}
+				},
+				"power": {
+					"current": 0,
+					"max": 0
 				}
-			]
+			},
+			"metadata": []
 		}
 
 .. http:put:: /controllers/(int:controller_id)
@@ -186,9 +181,9 @@ General
 				"id": 101632,
 				"source": "ilmatieteenlaitos",
 			},
-    		"electricity": {
-      			"tariff": "stock price",
-      			"price": {
+			"electricity": {
+				"tariff": "stock price",
+				"price": {
        				"current": 11.08,
        				"usage": 0,
        				"primary": 0.6,
@@ -234,29 +229,22 @@ Accounts
 
 	Retrieves all the accounts attached to this controller - if account_id parameter is given gets a specific account_id, gets all if account_id is not set
 
-	:<json boolean success: Flag to check if method call returned without errors
-	:<json array data: All the object data
-	:<json int id: Account id number
-	:<json email email: Valid email adress for the account - Same as username
-	:<json string firstname: First name of the user (spelled wrong)
-	:<json string lastname: Las name of the user (spelled wrong)
-	:<json string access: Access level of the user
+	:>json int id: Account id number
+	:>json email email: Valid email adress for the account - Same as username
+	:>json string firstname: First name of the user (spelled wrong)
+	:>json string lastname: Las name of the user (spelled wrong)
+	:>json string access: Access level of the user
 
 	Example response:
 
 	.. code-block:: json
 
 		{
-  			"success": true,
-  			"data": [
-    			{
-      				"id": 1,
-      				"email": "assi.asiakas@kotivo.fi",
-      				"firstname": "assii",
-      				"lastname": "asiakas",
-      				"access": "owner"
-    			}
-  			]
+			"id": 1,
+			"email": "assi.asiakas@kotivo.fi",
+			"firstname": "assii",
+			"lastname": "asiakas",
+			"access": "owner"
 		}
 
 	No option for PUT

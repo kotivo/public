@@ -7,7 +7,7 @@ General
 
 .. http:get:: /controllers/(int:controller_id)/modules/(int:module_id)
 
-	Retrieves all the modules (devices) registered to this controller - can target a specific module_id device, gets all if module_id is not set
+	Retrieves all the modules (devices) registered to this controller - can target a specific (int: module_id) device, gets all if (int: module_id) is not set
 
 	Here is a list of parameters for the request body - Everything not under the ORIGINAL are device type specific and cannot be given to any other type of device
 
@@ -118,52 +118,49 @@ General
 	.. code-block:: json
 
 		{
-			"success": true,
-			"data": {
-				"id": 22,
-				"label": "patteri3",
-				"serial_number": 10115,
-				"verification_code": "12345678",
-				"type": 2,
-				"connected": false,
-				"weather_station": null,
-				"error": {
-					"code": 0,
-					"msg": "Messages not in use so far."
+			"id": 22,
+			"label": "patteri3",
+			"serial_number": 10115,
+			"verification_code": "12345678",
+			"type": 2,
+			"connected": false,
+			"weather_station": null,
+			"error": {
+				"code": 0,
+				"msg": "Messages not in use so far."
+			},
+			"metadata": {
+				"order": 4
+			},
+			"away": false,
+			"temperature": {
+				"current": 0,
+				"target": 23.32,
+				"warning": {
+					"min": -50,
+					"max": 50
 				},
-				"metadata": {
-					"order": 4
+				"advance": false,
+				"safety": 20,
+				"floor_sensor": {
+					"current": null,
+					"mode": "off"
 				},
-				"away": false,
-				"temperature": {
-					"current": 0,
-					"target": 23.32,
-					"warning": {
-						"min": -50,
-						"max": 50
-					},
-					"advance": false,
-					"safety": 20,
-					"floor_sensor": {
-						"current": null,
-						"mode": "off"
-					},
-					"heating": false
-				},
-				"humidity": {
-					"current": 0,
-					"warning": {
-						"min": 0,
-						"max": 100
-					}
-				},
-				"electricity": {
-					"price": {
-						"max_effect": "1.0"
-					}
-				},
-				"power": 0
-			}
+				"heating": false
+			},
+			"humidity": {
+				"current": 0,
+				"warning": {
+					"min": 0,
+					"max": 100
+				}
+			},
+			"electricity": {
+				"price": {
+					"max_effect": "1.0"
+				}
+			},
+			"power": 0
 		}
 
 .. http:put:: /controllers/(int:controller_id)/modules/(int:module_id)

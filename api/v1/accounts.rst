@@ -28,12 +28,9 @@ Authentication can be done either using session (browser environments) or using 
 	.. code-block:: json
 
 		{
-			"success": true,
-			"data": {
-				"id": 1,
-				"username": "user@example.com",
-				"language": "fi"
-			}
+			"id": 1,
+			"username": "user@example.com",
+			"language": "fi"
 		}
 
 .. http:put:: /accounts/login/
@@ -96,8 +93,6 @@ Information
 	.. code-block:: json
 
 		{
-		  "success": true,
-		  "data": {
 		    "id": 1,
 		    "email": "username@example.com",
 		    "firstname": "Sherlock",
@@ -128,7 +123,6 @@ Information
 		      "system-user-interface": "might be something system related here"
 		    }
 		  }
-		}
 
 Utility
 ****************************************
@@ -136,6 +130,9 @@ Utility
 .. http:put:: /accounts/invite
 
 	Send email to invite new user for the controller
+
+	:<json email email: Target email
+	:<json int controller_id: Target controller id number
 
 	Example request body:
 
@@ -176,15 +173,12 @@ Utility
 	.. code-block:: json
 
 		{
-	  		"success": true,
-	  		"data": {
-	   	 		"id": 156,
-	    		"subject": "Kotivo yhteysvika: 666",
-	    		"content": "Keskusyksikkösi \"666\" ei ole ollut yhteydessä vuorokauteen. Tarkista keskusyksikkösi internet yhteys.",
-	    		"created": "2019-09-25T11:56:01+03:00",
-	    		"seen": true,
-	    		"metadata": {
-	      			"dismissed": true
-	    		}
-	  		}
+			"id": 156,
+			"subject": "Kotivo yhteysvika: 666",
+			"content": "Keskusyksikkösi \"666\" ei ole ollut yhteydessä vuorokauteen. Tarkista keskusyksikkösi internet yhteys.",
+			"created": "2019-09-25T11:56:01+03:00",
+			"seen": true,
+			"metadata": {
+	  			"dismissed": true
+			}
 		}
