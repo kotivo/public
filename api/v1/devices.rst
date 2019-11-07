@@ -7,7 +7,7 @@ General
 
 .. http:get:: /controllers/(int:controller_id)/modules/(int:module_id)
 
-	Retrieves all the modules (devices) registered to this controller - can target a specific (int: module_id) device, gets all if (int: module_id) is not set
+	Retrieves all the modules (devices) registered to this controller - can target a specific (int: module_id) device - gets all if not set
 
 	Here is a list of parameters for the request body - Everything not under the ORIGINAL are device type specific and cannot be given to any other type of device
 
@@ -166,7 +166,7 @@ General
 
 .. http:put:: /controllers/(int:controller_id)/modules/(int:module_id)
 
-	Creates a new device according to parameters - controller_id, and module_id are required, type can not be set through this method. type is set outside of api. Proper functionality requires type != 0. If physical device is found, controller gets and sets type accordingly
+	Creates a new device according to parameters - (int:controller_id) and (int:module_id) are required, type can not be set through this method. type is set outside of api. Proper functionality requires type != 0. If physical device is found, controller gets and sets type accordingly
 
 	:<json string label: Label of the device
 	:<json int serial number: Serial number for the device

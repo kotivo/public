@@ -5,7 +5,7 @@ General
 
 .. http:get:: /controllers/(int:controller_id)/modules/(int:device_id)/rules/(int:profile_id)
 
-	Gets all the rules for certain device_id and profile_id - gets all if profile_id is not given
+	Gets all the rules for certain (int:device_id) and (int:profile_id) - gets all if not set
 
 	:>json string id: Name of the rule - int if self made rule
 	:>json float temperature: Target temperature for this rule
