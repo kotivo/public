@@ -6,9 +6,7 @@ General
 
 .. http:get:: /controllers/(int:controller_id)/profiles/(int:profile_id)
 
-	Retrieves all the profiles registered to this controller - can target a specific profile_id, gets all if module_id is not set
-
-	Here is a list of parameters for the request body:
+	Retrieves all the profiles registered to this controller - can target a specific (int:profile_id), gets all if (int:module_id) is not set
 
 	:>json int id: Profile id number if not default "away" or "present"
 	:>json string label: Name of the profile
@@ -63,7 +61,41 @@ General
 			}
 		]
 
-	???? PUT needs to be tested somehow! ????
+.. http:put:: /controllers/(int:controller_id)/profiles/(int:profile_id)
+
+	Creates a profile according to parameters. (int:profile_id) is required (!!!false information in api tool !!!)
+
+	Here is a list of parameters for the request body:
+
+	:>json string label: Name of the profile
+	:>json boolean active: Whether or not the proflile is  active or not
+	:>json boolean enabled: Whether or not the profile is set enabled or not
+	:>json object period: All the DateTime object data
+	:>json object period.time: Begin and end hours
+	:>json ISO-8601 period.time.begin: When the profile is set active
+	:>json ISO-8601 period.time.end: End time when profile is deactivated
+
+	Example request body:
+
+	.. code-block:: json
+
+		{
+			"id": 2,
+			"label": "test",
+			"active": false,
+			"enabled": false,
+			"period": {
+				"time": {
+					"begin": "14:50:00+02:00",
+					"end": "14:50:00+02:00"
+				}
+			},
+			"weekdays": [
+				6,
+				7
+			],
+			"metadata": []
+		}
 
 Away
 ****************************************

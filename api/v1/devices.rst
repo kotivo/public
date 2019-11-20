@@ -7,7 +7,7 @@ General
 
 .. http:get:: /controllers/(int:controller_id)/modules/(int:module_id)
 
-	Retrieves all the modules (devices) registered to this controller - can target a specific (int: module_id) device - gets all if not set
+	Retrieves all the modules (devices) registered to this controller - can target a specific (int:module_id) device - gets all if not set
 
 	Here is a list of parameters for the request body - Everything not under the ORIGINAL are device type specific and cannot be given to any other type of device
 
