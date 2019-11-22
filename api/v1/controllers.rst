@@ -7,7 +7,9 @@ General
 
 .. http:get:: /controllers/(int:controller_id)
 
-	Retrieves controllers - if (int:controller_id) parameter is given gets a specific controller - gets all if not set
+	Get information of a controller or all controllers for current account.
+
+	:query int controller_id: Controller ID, optional
 
 	:>json int id: Controller ID
 	:>json string label: Name of the Controller
@@ -136,7 +138,9 @@ General
 
 .. http:put:: /controllers/(int:controller_id)
 
-	Method to change label, prices, weather locality etc. - Always requires (int:controller_id)
+	Update controller information.
+
+	:query int controller_id: Controller ID
 
 	:<json string label: Name of the Controller
 	:<json object weather_locality: Weather station information
@@ -227,7 +231,10 @@ Accounts
 
 .. http:get:: /controllers/(int:controller_id)/accounts/(int:account_id)
 
-	Retrieves all the accounts attached to this controller - if (int:account_id) parameter is given gets a specific account - gets all if not set
+	Get account or all accounts attached to this controller.
+
+	:query int controller_id: Controller ID
+	:query int account_id: Account ID, optional
 
 	:>json int id: Account id number
 	:>json email email: Valid email adress for the account - Same as username
@@ -246,5 +253,3 @@ Accounts
 			"lastname": "asiakas",
 			"access": "owner"
 		}
-
-	No option for PUT

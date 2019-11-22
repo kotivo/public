@@ -159,7 +159,9 @@ Utility
 
 .. http:get:: /accounts/messages/(int:message_id)
 
-	Gets one message from database according to message_id.
+	Get message or all messages for current account.
+
+	:query int message_id: Message ID, optional
 
 	:>json int id: Message id
 	:>json string subject: The subject title of the message
