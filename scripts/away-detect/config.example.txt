@@ -1,0 +1,11 @@
+# api url
+api_url="http://yhteys.kotivo.fi/api/v1"
+# controller id
+ctrl_id="1234"
+# mac addresses to test
+macs="cc:9f:7a:21:b9:7b"
+# basic auth info
+auth="user@example.com:password"
+# timeout in minutes after which to set away
+timeout=10
+

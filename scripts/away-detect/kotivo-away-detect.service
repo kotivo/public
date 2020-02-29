@@ -1,0 +1,9 @@
+[Unit]
+Description=Kotivo controller away detection through MAC addresses on local network
+
+[Service]
+Restart=always
+ExecStart=CHANGE PATH HERE/away-detector.sh
+
+[Install]
+WantedBy=multi-user.target
